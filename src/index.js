@@ -108,7 +108,7 @@ class CurrencyInput extends Component {
      * @param nextProps
      * @see https://facebook.github.io/react/docs/component-specs.html#updating-componentwillreceiveprops
      */
-    componentWillReceiveProps(nextProps) {
+     UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState(this.prepareProps(nextProps));
     }
 
@@ -119,19 +119,19 @@ class CurrencyInput extends Component {
      * @see https://facebook.github.io/react/docs/react-component.html#componentdidmount
      */
     componentDidMount(){
-        let node = ReactDOM.findDOMNode(this.theInput);
-        let selectionStart, selectionEnd;
+        // let node = ReactDOM.findDOMNode(this.theInput);
+        // let selectionStart, selectionEnd;
 
         if (this.props.autoFocus) {
             this.theInput.focus();
-            selectionEnd = this.state.maskedValue.length - this.props.suffix.length;
-            selectionStart = selectionEnd;
+            // selectionEnd = this.state.maskedValue.length - this.props.suffix.length;
+            // selectionStart = selectionEnd;
         } else {
-            selectionEnd = Math.min(node.selectionEnd, this.theInput.value.length - this.props.suffix.length);
-            selectionStart = Math.min(node.selectionStart, selectionEnd);
+            // selectionEnd = Math.min(node.selectionEnd, this.theInput.value.length - this.props.suffix.length);
+            // selectionStart = Math.min(node.selectionStart, selectionEnd);
         }
 
-        this.setSelectionRange(node, selectionStart, selectionEnd);
+        // this.setSelectionRange(node, selectionStart, selectionEnd);
     }
 
 
@@ -140,7 +140,7 @@ class CurrencyInput extends Component {
      * @returns {XML}
      * @see https://facebook.github.io/react/docs/react-component.html#componentwillupdate
      */
-    componentWillUpdate() {
+     UNSAFE_componentWillUpdate() {
         let node = ReactDOM.findDOMNode(this.theInput);
         this.inputSelectionStart = node.selectionStart;
         this.inputSelectionEnd = node.selectionEnd;
@@ -154,7 +154,7 @@ class CurrencyInput extends Component {
      */
     componentDidUpdate(prevProps, prevState){
         const { decimalSeparator } = this.props;
-        let node = ReactDOM.findDOMNode(this.theInput);
+        // let node = ReactDOM.findDOMNode(this.theInput);
         let isNegative = (this.theInput.value.match(/-/g) || []).length % 2 === 1;
         let minPos = this.props.prefix.length + (isNegative ? 1 : 0);
         let selectionEnd = Math.max(minPos, Math.min(this.inputSelectionEnd, this.theInput.value.length - this.props.suffix.length));
@@ -183,7 +183,7 @@ class CurrencyInput extends Component {
             selectionStart = selectionEnd;
         }
 
-        this.setSelectionRange(node, selectionStart, selectionEnd);
+        // this.setSelectionRange(node, selectionStart, selectionEnd);
         this.inputSelectionStart = selectionStart;
         this.inputSelectionEnd = selectionEnd;
     }
